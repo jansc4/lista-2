@@ -3,26 +3,40 @@
 //
 
 #include "vector"
+#include "string"
 
 #ifndef LISTA2_WIELOMIAN_H
 #define LISTA2_WIELOMIAN_H
 
-namespace std {
 
-    class Wielomian {
-        private:
-            vector<float> parameters;
-        public:
-            Wielomian(vector<float> &parameters);
 
-            void setParameters(const vector<float> &parameters);
+class Wielomian {
+    private:
+        std::vector<float> parameters;
+    public:
+        //Konstruktor
+        explicit Wielomian(const std::vector<float>& parameters);
 
-            [[nodiscard]] const vector<float> &getParameters() const;
+        // Metody
+        [[nodiscard]] int stopien() const;
+        [[nodiscard]] std::string toString() const;
+        float operator()(float x) const;
+        static bool checkList(std::vector<float>& parameters);
 
-            void printWielomian();
+        // Operatory matematyczne
+        Wielomian operator+(const Wielomian& other) const;
+        Wielomian operator-(const Wielomian& other) const;
+        Wielomian operator*(const Wielomian& other) const;
 
-    };
+        // Operatory złożone
+        Wielomian& operator+=(const Wielomian& other);
+        Wielomian& operator-=(const Wielomian& other);
+        Wielomian& operator*=(const Wielomian& other);
 
-} // std
+        // Gettery
+        [[nodiscard]] const std::vector<float>& getParam() const;
+        void setParam(std::vector<float>& param);
 
+
+};
 #endif //LISTA2_WIELOMIAN_H
